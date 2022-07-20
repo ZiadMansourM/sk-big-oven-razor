@@ -18,8 +18,10 @@ public class CategoriesModel : PageModel
         Message = "List handler fired";
     }
 
-    public void OnPostCreate()
+    public async Task OnPostCreate(string categoryName)
     {
+        _ = await Requests.CreateCategory(categoryName);
+        Categories = await Requests.ListCategories();
         Message = "Create handler fired";
     }
 
@@ -28,17 +30,17 @@ public class CategoriesModel : PageModel
         Message = $"Get handler fired {id}";
     }
 
-    public async Task OnPostUpdate(Guid id)
+    public async Task OnPostUpdate(string id, string categoryName)
     {
+        _ = await Requests.UpdateCategory(new Guid(id), categoryName);
         Categories = await Requests.ListCategories();
-        Console.WriteLine($"{id}");
         Message = $"Update handler fired {id}";
     }
 
     public async Task OnPostDelete(Guid id)
     {
+        await Requests.DeleteCategory(id);
         Categories = await Requests.ListCategories();
-        Console.WriteLine($"{id}");
         Message = $"Delete handler fired {id}";
     }
 }

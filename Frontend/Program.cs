@@ -113,7 +113,7 @@ public static class Requests
         var json = JsonSerializer.Serialize(category);
         var payload = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
         using var client = new HttpClient();
-        var result = await client.PostAsync(uri, payload);
+        var result = await client.PutAsync(uri, payload);
         var responce = await result.Content.ReadAsStringAsync();
         return Deserialize<Frontend.Models.Category>(json);
     }
@@ -126,7 +126,7 @@ public static class Requests
         var responce = await result.Content.ReadAsStringAsync();
     }
 
-    async public static void DeleteCategory(Guid id)
+    async public static Task DeleteCategory(Guid id)
     {
         var uri = new Uri($"{_baseAddress}/categories/{id}");
         using var client = new HttpClient();

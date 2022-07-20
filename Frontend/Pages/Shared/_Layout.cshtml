@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Frontend.styles.css" asp-append-version="true" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -22,9 +23,9 @@
             <div>
                 <h3 class="float-md-start mb-0" asp-area="" asp-page="/Index">👨‍🍳 BigOven</h3>
                 <nav class="nav nav-masthead justify-content-center float-md-end">
-                    <a class="nav-link active" asp-area="" asp-page="/Index">Home</a>
-                    <a class="nav-link" asp-area="" asp-page="/Recipes">Recipes</a>
-                    <a class="nav-link" asp-area="" asp-page="/Categories">Categories</a>
+                    <a class="nav-link @if(@ViewData["Title"]!.ToString() == "Home") {<text>active</text>}" asp-area="" asp-page="/Index">Home</a>
+                    <a class="nav-link @if(@ViewData["Title"]!.ToString() == "Recipes") {<text>active</text>}" asp-area="" asp-page="/Recipes">Recipes</a>
+                    <a class="nav-link @if(@ViewData["Title"]!.ToString() == "Categories") {<text>active</text>}" asp-area="" asp-page="/Categories">Categories</a>
                 </nav>
             </div>
         </header>
@@ -36,6 +37,12 @@
         <footer class="mt-auto text-white-50">
             <p>&copy; 2022 <a href="https://www.SREboy.com/" class="text-white link">SREboy.com</a></p>
         </footer>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        @await RenderSectionAsync("Scripts", required: false)
     </div>
 </body>
 </html>
