@@ -129,6 +129,7 @@ public static class Category
 
     private static IResult UpdateCategory(Guid id, [FromBody] Backend.Models.Category category)
     {
+        Console.WriteLine($"{id}, {category.Id}/{category.Name}");
         return Results.Json(
             _service.UpdateCategory(
                 id,
