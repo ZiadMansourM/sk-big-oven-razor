@@ -81,3 +81,26 @@ body {
     background-color: #212529;
     color: white;
 }
+
+/* Fix Floating Input */
+.custom-form-floating {
+    position: relative;
+    padding-bottom: 13px;
+}
+
+.custom-form-floating:before {
+    content: '';
+    position: absolute;
+    top: 1px; /* border-width (default by BS) */
+    left: 1px; /* border-width (default by BS) */
+    /*width: calc(100% - 14px);*/ /* to show scrollbar */
+    height: 32px;
+    border-radius: 4px; /* (default by BS) */
+    background-color: #212529;
+}
+
+.custom-form-floating textarea.form-control {
+    padding-top: 30px; /* height of pseudo element 32 px */
+    /*min-height: 80px;*/ /* not relevant */
+}
+

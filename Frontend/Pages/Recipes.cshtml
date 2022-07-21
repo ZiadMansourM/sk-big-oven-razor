@@ -33,10 +33,10 @@
     <tbody>
         @{int i = 1;}
         @foreach (var recipe in Model.Recipes)
-        {
+            {
             <tr>
                 <th scope="row">@(i++)</th>
-                <td>@recipe.Name</td>
+                <td><button class="btn btn-link link-detail" data-bs-toggle="modal" data-bs-target="#@("iddetail" + recipe.Id)">@recipe.Name</button></td>
                 <td>
                     <form style='display: inline;' asp-page-handler="update" method="post">
                         <button class="btn btn-link link">
@@ -56,6 +56,87 @@
                     </form>
                 </td>
             </tr>
+            <!-- Detail Modal -->
+            <div class="modal fade custom-model" id="@("iddetail" + recipe.Id)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="@("iddetail" + recipe.Id)" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="@("iddetail" + recipe.Id)">Category Details</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" value="@recipe.Name" readonly>
+                                        <label for="floatingInput">Category Name</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" value="@recipe.Id" readonly>
+                                        <label for="floatingInput">Category Guid</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-floating custom-form-floating">
+                                <textarea class="form-control h-100" rows="@(recipe.Ingredients.Count)" id="floatingTextarea2" readonly>
+                                    @{int j = 0;}
+                                    @foreach (var ing in recipe.Ingredients)
+                                        {
+                                            if(j==0)
+                                            {
+                                                j = 1;
+                                            } else
+                                            {
+                                                @("\n")
+                                            }
+                                            @("- " + @ing)
+                                    }
+                                </textarea>
+                                <label for="floatingTextarea2">Ingredients</label>
+                            </div>
+                            <div class="form-floating custom-form-floating">
+                                <textarea class="form-control h-100" rows="@(recipe.Instructions.Count)" id="floatingTextarea2" readonly>
+                                    @{int k = 0;}
+                                    @foreach (var ins in recipe.Instructions)
+                                        {
+                                            if(k==0)
+                                            {
+                                                k = 1;
+                                            } else
+                                            {
+                                                @("\n")
+                                            }
+                                            @("- " + @ins)
+                                    }
+                                </textarea>
+                                <label for="floatingTextarea2">Instructions</label>
+                            </div>
+                            <div class="form-floating custom-form-floating">
+                                <textarea class="form-control h-100" rows="@(recipe.CategoriesIds.Count)" id="floatingTextarea2" readonly>
+                                    @{int w = 0;}
+                                    @foreach (var name in Model.CategoriesNames[i-2])
+                                    {
+                                            if(w==0)
+                                            {
+                                                w = 1;
+                                            } else
+                                            {
+                                                @("\n")
+                                            }
+                                            @("- " + @name)
+                                    }
+                                </textarea>
+                                <label for="floatingTextarea2">Categories</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary fw-bold border-white bg-white" data-bs-dismiss="modal">Great</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
     </tbody>
 </table>
