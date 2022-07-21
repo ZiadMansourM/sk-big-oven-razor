@@ -31,10 +31,11 @@
         </tr>
     </thead>
     <tbody>
+        @{int i = 1;}
         @foreach (var recipe in Model.Recipes)
         {
             <tr>
-                <th scope="row">1</th>
+                <th scope="row">@(i++)</th>
                 <td>@recipe.Name</td>
                 <td>
                     <form style='display: inline;' asp-page-handler="update" method="post">
