@@ -1,6 +1,9 @@
 # 🫡 Welcome to sk-big-oven-razor Using .NET 6 🤖 
 Third task on my internship at [SilverKey](https://www.silverkeytech.com/).
 
+<details>
+<summary>🚨 Day One</summary>
+
 # 🦦 Checklist of the day
 - [X] Learn razor Pages [tutorials](https://www.learnrazorpages.com/).
 - [X] Added backend from [exTwo](https://github.com/ZiadMansourM/sk-big-oven-api).
@@ -21,7 +24,11 @@ Third task on my internship at [SilverKey](https://www.silverkeytech.com/).
 ## 📚 CategoryList
 <img width="1440" alt="categories" src="https://user-images.githubusercontent.com/64917739/179885260-70b7a635-d4aa-4582-ace4-731ac77b6949.png">
 
+</details>
 
+<details>
+<summary>🚨 Day Two</summary>
+  
 # 🦦 Checklist of day two.
 - [X] Create "Create, Get, Update, Delete" Views for Category.
 - [X] Fix active link in nav-bar.
@@ -50,8 +57,11 @@ Third task on my internship at [SilverKey](https://www.silverkeytech.com/).
 
 ## 🧐 CategoryDetail view
 <img width="1440" alt="eight" src="https://user-images.githubusercontent.com/64917739/180080507-abb672c7-694d-4be8-ba5f-a1a8111a9d1e.png">
+</details>
 
-
+<details>
+<summary>🚨 Day Three</summary>
+  
 # 🦦 Checklist of day three.
 - [X] Create "Create, Get, Update, Delete" Views for Recipe.
 - [ ] Move _baseAddress to appsettings.json.
@@ -93,7 +103,4 @@ Third task on my internship at [SilverKey](https://www.silverkeytech.com/).
 ## ✅ After Delete:
 
 <img width="1440" alt="seven" src="https://user-images.githubusercontent.com/64917739/180360309-55fd1862-79c9-4a9a-9c75-715c96078838.png">
-
-
-
-
+</details>
