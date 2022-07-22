@@ -9,15 +9,13 @@
         <h2 class="text-start px-4">Recipes</h2>
     </div>
     <div class="col-sm-4">
-        <form asp-page-handler="create" method="post">
-            <button class="btn btn-dark">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                </svg>
-                Add New
-            </button>
-        </form>
+        <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#createRecipe">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+            </svg>
+            Add New
+        </button>
     </div>
 </div>
 <hr />
@@ -33,7 +31,7 @@
     <tbody>
         @{int i = 1;}
         @foreach (var recipe in Model.Recipes)
-            {
+        {
             <tr>
                 <th scope="row">@(i++)</th>
                 <td><button class="btn btn-link link-detail" data-bs-toggle="modal" data-bs-target="#@("iddetail" + recipe.Id)">@recipe.Name</button></td>
@@ -61,7 +59,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="@("iddetail" + recipe.Id)">Category Details</h5>
+                            <h5 class="modal-title" id="@("iddetail" + recipe.Id)">Recipe Details</h5>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -140,3 +138,48 @@
         }
     </tbody>
 </table>
+
+<!-- Create Modal -->
+<div class="modal fade custom-model" id="createRecipe" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createRecipeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <form asp-page-handler="create" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createRecipe">Category Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" name="name">
+                        <label for="floatingInput">Category Name</label>
+                    </div>
+                    <div class="form-floating custom-form-floating">
+                        <textarea class="form-control h-100" name="ingredients" id="floatingTextarea2">
+                    </textarea>
+                        <label for="floatingTextarea2">Ingredients</label>
+                    </div>
+                    <div class="form-floating custom-form-floating">
+                        <textarea class="form-control h-100" name="instructions" id="floatingTextarea2">
+                    </textarea>
+                        <label for="floatingTextarea2">Instructions</label>
+                    </div>
+                    @*Categories Names*@
+                    @{int c = 0;}
+                    @foreach (var category in Model.Categories)
+                    {
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="categoriesIds" value="@category.Id" type="checkbox" id="@("flex" + @c)">
+                            <label class="form-check-label" for="@("flex" + @c++)">@category.Name</label>
+                        </div>
+                    }
+                </div>
+                <div class="text-start">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary fw-bold border-white bg-white" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success fw-bold border-white">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

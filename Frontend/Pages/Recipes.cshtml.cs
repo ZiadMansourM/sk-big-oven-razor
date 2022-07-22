@@ -11,20 +11,38 @@ public class RecipesModel : PageModel
 {
     public string Message { get; set; } = "Error";
     public List<Models.Recipe> Recipes { get; set; } = new();
+    public List<Models.Category> Categories { get; set; } = new();
     public List<List<string>> CategoriesNames { get; set; } = new();
 
     public async Task OnGet()
     {
         Recipes = await Requests.ListRecipes();
         // Map recipe.CategoriesIds to Names
-        List<Models.Category> categories = await Requests.ListCategories();
-        CategoriesNames = GetCategoriesNames(Recipes, categories);
+        Categories = await Requests.ListCategories();
+        CategoriesNames = GetCategoriesNames(Recipes, Categories);
         Message = "List handler fired";
     }
 
-    public void OnPostCreate()
+    public async Task OnPostCreate()
     {
+        // Start
+        string name = Request.Form["name"];
+        String[] spearator = {"- ", "\n"};
+        string ingredients = Request.Form["ingredients"];
+        List<string> ingredientslist = ingredients.Split(spearator,
+           StringSplitOptions.RemoveEmptyEntries).ToList();
+        string instructions = Request.Form["instructions"];
+        List<string> instructionslist = instructions.Split(spearator,
+           StringSplitOptions.RemoveEmptyEntries).ToList();
+        List<Guid> guidIds = new();
+        foreach (var guid in Request.Form["categoriesIds"])
+            guidIds.Add(new Guid(guid));
+        await Requests.CreateRecipe(name, ingredientslist, instructionslist, guidIds);
         Message = "Create handler fired";
+        Recipes = await Requests.ListRecipes();
+        // Map recipe.CategoriesIds to Names
+        Categories = await Requests.ListCategories();
+        CategoriesNames = GetCategoriesNames(Recipes, Categories);
     }
 
     public void OnPostDetail(int id)
@@ -36,8 +54,8 @@ public class RecipesModel : PageModel
     {
         Recipes = await Requests.ListRecipes();
         // Map recipe.CategoriesIds to Names
-        List<Models.Category> categories = await Requests.ListCategories();
-        CategoriesNames = GetCategoriesNames(Recipes, categories);
+        Categories = await Requests.ListCategories();
+        CategoriesNames = GetCategoriesNames(Recipes, Categories);
         Message = $"Update handler fired {id}";
     }
 
@@ -45,8 +63,8 @@ public class RecipesModel : PageModel
     {
         Recipes = await Requests.ListRecipes();
         // Map recipe.CategoriesIds to Names
-        List<Models.Category> categories = await Requests.ListCategories();
-        CategoriesNames = GetCategoriesNames(Recipes, categories);
+        Categories = await Requests.ListCategories();
+        CategoriesNames = GetCategoriesNames(Recipes, Categories);
         Message = $"Delete handler fired {id}";
     }
 
