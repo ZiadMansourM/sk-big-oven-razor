@@ -18,10 +18,16 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.Run();
 
+public partial class Program
+{
+    public static readonly IConfiguration config = new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json")
+        .Build();
+}
 
 public static class Requests
 {
-    private const string _baseAddress = "http://localhost:5272";
+    private readonly static string _baseAddress = Program.config["baseAddress"];
 
     public static T Deserialize<T>(string json)
     {
