@@ -36,22 +36,16 @@
                 <th scope="row">@(i++)</th>
                 <td><button class="btn btn-link link-detail" data-bs-toggle="modal" data-bs-target="#@("iddetail" + recipe.Id)">@recipe.Name</button></td>
                 <td>
-                    <form style='display: inline;' asp-page-handler="update" method="post">
-                        <button class="btn btn-link link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-pencil" viewBox="0 0 16 16">
-                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                            </svg>
-                        </button>
-                        <input type="hidden" name="id" value=@recipe.Id />
-                    </form>
-                    <form style='display: inline;' asp-page-handler="delete" method="post">
-                        <button class="btn btn-link link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-trash3" viewBox="0 0 16 16">
-                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                            </svg>
-                        </button>
-                        <input type="hidden" name="id" value=@recipe.Id />
-                    </form>
+                    <button class="btn btn-link link" data-bs-toggle="modal" data-bs-target="#@("id" + recipe.Id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-pencil" viewBox="0 0 16 16">
+                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                        </svg>
+                    </button>
+                    <button class="btn btn-link link" data-bs-toggle="modal" data-bs-target="#@("iddelete" + recipe.Id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-trash3" viewBox="0 0 16 16">
+                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                        </svg>
+                    </button>
                 </td>
             </tr>
             <!-- Detail Modal -->
@@ -67,13 +61,13 @@
                                 <div class="col">
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" id="floatingInput" value="@recipe.Name" readonly>
-                                        <label for="floatingInput">Category Name</label>
+                                        <label for="floatingInput">Recipe Name</label>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" id="floatingInput" value="@recipe.Id" readonly>
-                                        <label for="floatingInput">Category Guid</label>
+                                        <label for="floatingInput">Recipe Guid</label>
                                     </div>
                                 </div>
                             </div>
@@ -135,6 +129,105 @@
                     </div>
                 </div>
             </div>
+            <!-- Update Modal -->
+            <div class="modal fade custom-model" id="@("id" + recipe.Id)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="@("id" + recipe.Id)" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                        <form asp-page-handler="update" method="post">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="@("id" + recipe.Id)">Update Recipe</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="name" class="form-control" id="floatingInput" value="@recipe.Name">
+                                            <label for="floatingInput">Recipe Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="targetId" class="form-control" id="floatingInput" value="@recipe.Id" readonly>
+                                            <label for="floatingInput">Category Guid</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-floating custom-form-floating">
+                                    <textarea class="form-control h-100" name="ingredients" rows="@(recipe.Ingredients.Count)" id="floatingTextarea2">
+                                    @{int q = 0;}
+                                    @foreach (var ing in recipe.Ingredients)
+                                    {
+                                            if(q==0)
+                                            {
+                                                q = 1;
+                                            } else
+                                            {
+                                                @("\n")
+                                            }
+                                            @("- " + @ing)
+                                    }
+                                    </textarea>
+                                    <label for="floatingTextarea2">Ingredients</label>
+                                </div>
+                                <div class="form-floating custom-form-floating">
+                                    <textarea class="form-control h-100" name="instructions" rows="@(recipe.Instructions.Count)" id="floatingTextarea2">
+                                    @{int t = 0;}
+                                    @foreach (var ins in recipe.Instructions)
+                                    {
+                                            if(t==0)
+                                            {
+                                                t = 1;
+                                            } else
+                                            {
+                                                @("\n")
+                                            }
+                                            @("- " + @ins)
+                                    }
+                                    </textarea>
+                                    <label for="floatingTextarea2">Instructions</label>
+                                </div>
+                                @{int p = 0;}
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <div class="form-check form-switch text-start">
+                                        <input class="form-check-input" name="categoriesIds" value="@category.Id" type="checkbox" id="@("flex" + @p)" @if(recipe.CategoriesIds.Contains(category.Id)) {<text>checked</text>}>
+                                        <label class="form-check-label" for="@("flex" + @p++)">@category.Name</label>
+                                    </div>
+                                }
+                            </div>
+                            <div class="text-start">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary fw-bold border-white bg-white" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success fw-bold border-white">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Delete Modal -->
+            <div class="modal fade custom-model" id="@("iddelete" + recipe.Id)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="@("iddelete" + recipe.Id)" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <form asp-page-handler="delete" method="post">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="@("iddelete" + recipe.Id)">Delete Recipe</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Confirm deleteing "@recipe.Name" 👀?</h3>
+                                <p class="text-danger">This can't be undone!</p>
+                                <input type="hidden" name="id" value="@recipe.Id" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary fw-bold border-white bg-white" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger fw-bold border-white">Delete</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         }
     </tbody>
 </table>
@@ -145,13 +238,13 @@
         <div class="modal-content">
             <form asp-page-handler="create" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createRecipe">Category Details</h5>
+                    <h5 class="modal-title" id="createRecipe">Create Recipe</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="floatingInput" name="name">
-                        <label for="floatingInput">Category Name</label>
+                        <label for="floatingInput">Recipe Name</label>
                     </div>
                     <div class="form-floating custom-form-floating">
                         <textarea class="form-control h-100" name="ingredients" id="floatingTextarea2">
@@ -163,11 +256,10 @@
                     </textarea>
                         <label for="floatingTextarea2">Instructions</label>
                     </div>
-                    @*Categories Names*@
                     @{int c = 0;}
                     @foreach (var category in Model.Categories)
                     {
-                        <div class="form-check form-switch">
+                        <div class="form-check form-switch text-start">
                             <input class="form-check-input" name="categoriesIds" value="@category.Id" type="checkbox" id="@("flex" + @c)">
                             <label class="form-check-label" for="@("flex" + @c++)">@category.Name</label>
                         </div>

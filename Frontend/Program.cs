@@ -101,7 +101,7 @@ public static class Requests
         var json = JsonSerializer.Serialize(recipe);
         var payload = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
         using var client = new HttpClient();
-        var result = await client.PostAsync(uri, payload);
+        var result = await client.PutAsync(uri, payload);
         var responce = await result.Content.ReadAsStringAsync();
         return Deserialize<Frontend.Models.Recipe>(json);
     }
@@ -118,7 +118,7 @@ public static class Requests
         return Deserialize<Frontend.Models.Category>(json);
     }
 
-    async public static void DeleteRecipe(Guid id)
+    async public static Task DeleteRecipe(Guid id)
     {
         var uri = new Uri($"{_baseAddress}/recipes/{id}");
         using var client = new HttpClient();
