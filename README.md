@@ -1,6 +1,9 @@
 # 🫡 Welcome to sk-big-oven-razor Using .NET 6 🤖 
 Third task on my internship at [SilverKey](https://www.silverkeytech.com/).
 
+<details>
+<summary>🚨 Day One</summary>
+
 # 🦦 Checklist of the day
 - [X] Learn razor Pages [tutorials](https://www.learnrazorpages.com/).
 - [X] Added backend from [exTwo](https://github.com/ZiadMansourM/sk-big-oven-api).
@@ -21,7 +24,11 @@ Third task on my internship at [SilverKey](https://www.silverkeytech.com/).
 ## 📚 CategoryList
 <img width="1440" alt="categories" src="https://user-images.githubusercontent.com/64917739/179885260-70b7a635-d4aa-4582-ace4-731ac77b6949.png">
 
+</details>
 
+<details>
+<summary>🚨 Day Two</summary>
+  
 # 🦦 Checklist of day two.
 - [X] Create "Create, Get, Update, Delete" Views for Category.
 - [X] Fix active link in nav-bar.
@@ -50,3 +57,50 @@ Third task on my internship at [SilverKey](https://www.silverkeytech.com/).
 
 ## 🧐 CategoryDetail view
 <img width="1440" alt="eight" src="https://user-images.githubusercontent.com/64917739/180080507-abb672c7-694d-4be8-ba5f-a1a8111a9d1e.png">
+</details>
+
+<details>
+<summary>🚨 Day Three</summary>
+  
+# 🦦 Checklist of day three.
+- [X] Create "Create, Get, Update, Delete" Views for Recipe.
+- [X] Move _baseAddress to appsettings.json.
+- [ ] use FluentValidation.
+
+## 📚 RecipeList view
+<img width="1440" alt="one" src="https://user-images.githubusercontent.com/64917739/180360171-bab8d1ac-0b04-46ae-ad2e-172e34ca92b8.png">
+
+## ➕ Creating a new recipe "Paella 🇪🇸"
+
+<img width="1440" alt="create" src="https://user-images.githubusercontent.com/64917739/180360547-b1d105a2-e6a9-4662-a848-ee0edef8e4fe.png">
+
+<img width="1440" alt="three" src="https://user-images.githubusercontent.com/64917739/180360208-7a976d01-8c8d-498d-8c7e-72c878f824a3.png">
+
+## 🔧 Updating Paella recipe:
+```
+- Name: "paalla -> Paella".
+- Ingredient: "rice -> 0.5 kg rice".
+- Remove Italian from categories Paella is Spanish.
+```
+
+<img width="1440" alt="update" src="https://user-images.githubusercontent.com/64917739/180360845-04030f47-e240-4f4b-a317-b8318025e8b3.png">
+
+## 🧐 RecipeDetail view
+
+<img width="1440" alt="four" src="https://user-images.githubusercontent.com/64917739/180360235-4b7776ef-f8bc-48c8-a1b7-f109fc2cf220.png">
+
+<img width="1440" alt="five" src="https://user-images.githubusercontent.com/64917739/180360245-a6994df6-4c6e-47e1-a93e-bc0308817de8.png">
+
+## ␡ Delete Eggs:
+```
+- was supposed to be called scrambled eggs.
+- Formating, Ingredients, Instructions are just below expectaions.
+> Better to delete it and start over.
+```
+
+<img width="1440" alt="six" src="https://user-images.githubusercontent.com/64917739/180360278-01ba8966-b6b4-4fbf-a34a-e41b176f7c1a.png">
+
+## ✅ After Delete:
+
+<img width="1440" alt="seven" src="https://user-images.githubusercontent.com/64917739/180360309-55fd1862-79c9-4a9a-9c75-715c96078838.png">
+</details>
