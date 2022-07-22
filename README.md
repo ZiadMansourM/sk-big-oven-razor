@@ -64,7 +64,7 @@ Third task on my internship at [SilverKey](https://www.silverkeytech.com/).
   
 # 🦦 Checklist of day three.
 - [X] Create "Create, Get, Update, Delete" Views for Recipe.
-- [ ] Move _baseAddress to appsettings.json.
+- [X] Move _baseAddress to appsettings.json.
 - [ ] use FluentValidation.
 
 ## 📚 RecipeList view
