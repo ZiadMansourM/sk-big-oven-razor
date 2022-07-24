@@ -4,6 +4,15 @@
     ViewData["Title"] = "Categories";
 }
 
+@foreach (var msg in Model.Messages)
+{
+    <div class="alert alert-danger shadow p-3 mb-4 bg-body rounded" role="alert">
+        <a class="btn-alert-cls link" data-bs-toggle="modal" data-bs-target="#categoryPolcy">
+            @msg
+        </a>
+    </div>
+}
+
 <div class="row">
     <div class="col-sm-8">
         <h2 class="text-start px-4">Categories</h2>
@@ -31,7 +40,7 @@
     <tbody>
         @{int i = 1;}
         @foreach (var category in Model.Categories)
-            {
+        {
             <tr>
                 <th scope="row">@(i++)</th>
                 <td><button class="btn btn-link link-detail" data-bs-toggle="modal" data-bs-target="#@("iddetail" + category.Id)">@category.Name</button></td>
@@ -142,6 +151,27 @@
                     <button type="submit" class="btn btn-success fw-bold border-white">Create</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Policy -->
+<div class="modal fade custom-model" id="categoryPolcy" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="categoryPolcy" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="categoryPolcy">Category Know-How</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" value="Must not be empty." class="form-control" id="floatingInput" placeholder="Egyptian Food" readonly>
+                        <label for="floatingInput">Category Name</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success fw-bold border-white" data-bs-dismiss="modal">Understood</button>
+                </div>
         </div>
     </div>
 </div>

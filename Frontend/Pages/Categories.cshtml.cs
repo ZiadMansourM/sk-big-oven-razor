@@ -4,43 +4,50 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using FluentValidation.Results;
 
 namespace Frontend.Pages;
 
 public class CategoriesModel : PageModel
 {
-    public string Message { get; set; } = "Error";
     public List<Models.Category> Categories { get; set; } = new();
+    public List<string> Messages = new();
 
-    public async Task OnGet()
+    public async Task OnGet(List<string> msgs)
     {
         Categories = await Requests.ListCategories();
-        Message = "List handler fired";
+        Messages = msgs;
     }
 
-    public async Task OnPostCreate(string categoryName)
+    public async Task<IActionResult> OnPostCreate(string categoryName)
     {
-        _ = await Requests.CreateCategory(categoryName);
-        Categories = await Requests.ListCategories();
-        Message = "Create handler fired";
+        Models.CategoryValidator validator = new();
+        ValidationResult results = validator.Validate(
+            new Models.Category(categoryName)
+        );
+        if (results.IsValid)
+            _ = await Requests.CreateCategory(categoryName);
+        else
+        {
+            List<string> msgs = new();
+            foreach (var failure in results.Errors)
+                msgs.Add(
+                    $"Property {failure.PropertyName}: {failure.ErrorMessage}"
+                );
+            Messages = msgs;
+        }
+        return RedirectToPage("./Categories", new { msgs = Messages });
     }
 
-    public void OnPostDetail(int id)
-    {
-        Message = $"Get handler fired {id}";
-    }
-
-    public async Task OnPostUpdate(string id, string categoryName)
+    public async Task<IActionResult> OnPostUpdate(string id, string categoryName)
     {
         _ = await Requests.UpdateCategory(new Guid(id), categoryName);
-        Categories = await Requests.ListCategories();
-        Message = $"Update handler fired {id}";
+        return RedirectToPage("./Categories", new { msgs = Messages });
     }
 
-    public async Task OnPostDelete(Guid id)
+    public async Task<IActionResult> OnPostDelete(Guid id)
     {
         await Requests.DeleteCategory(id);
-        Categories = await Requests.ListCategories();
-        Message = $"Delete handler fired {id}";
+        return RedirectToPage("./Categories", new { msgs = Messages });
     }
 }
