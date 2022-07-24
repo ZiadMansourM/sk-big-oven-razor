@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -9,22 +10,21 @@ namespace Frontend.Pages;
 
 public class RecipesModel : PageModel
 {
-    public string Message { get; set; } = "Error";
+    public List<string> Messages { get; set; } = new();
     public List<Models.Recipe> Recipes { get; set; } = new();
     public List<Models.Category> Categories { get; set; } = new();
-    public Dictionary<Guid, string> catDict { get; set; } = new();
     public List<List<string>> CategoriesNames { get; set; } = new();
+    public Dictionary<Guid, string> catDict { get; set; } = new();
 
-    public async Task OnGet()
+    public async Task OnGet(List<string> msgs)
     {
         Recipes = await Requests.ListRecipes();
-        // Map recipe.CategoriesIds to Names
         Categories = await Requests.ListCategories();
         CategoriesNames = GetCategoriesNames(Recipes, Categories);
-        Message = "List handler fired";
+        Messages = msgs;
     }
 
-    public async Task OnPostCreate()
+    public async Task<IActionResult> OnPostCreate()
     {
         string name = Request.Form["name"];
         String[] spearator = {"- ", "\n"};
@@ -37,20 +37,26 @@ public class RecipesModel : PageModel
         List<Guid> guidIds = new();
         foreach (var guid in Request.Form["categoriesIds"])
             guidIds.Add(new Guid(guid));
-        await Requests.CreateRecipe(name, ingredientslist, instructionslist, guidIds);
-        Message = "Create handler fired";
-        Recipes = await Requests.ListRecipes();
-        // Map recipe.CategoriesIds to Names
-        Categories = await Requests.ListCategories();
-        CategoriesNames = GetCategoriesNames(Recipes, Categories);
+        // Validation
+        Models.RecipeValidator validator = new();
+        ValidationResult results = validator.Validate(
+            new Models.Recipe(name, ingredientslist, instructionslist, guidIds)
+        );
+        if (results.IsValid)
+            await Requests.CreateRecipe(name, ingredientslist, instructionslist, guidIds);
+        else
+        {
+            List<string> msgs = new();
+            foreach (var failure in results.Errors)
+                msgs.Add(
+                    $"Property {failure.PropertyName}: {failure.ErrorMessage}"
+                );
+            Messages = msgs;
+        }
+        return RedirectToPage("./Recipes", new { msgs = Messages });
     }
 
-    public void OnPostDetail(int id)
-    {
-        Message = $"Get handler fired {id}";
-    }
-
-    public async Task OnPostUpdate()
+    public async Task<IActionResult> OnPostUpdate()
     {
         Guid id = new Guid(Request.Form["targetId"]);
         string name = Request.Form["name"];
@@ -64,22 +70,29 @@ public class RecipesModel : PageModel
         List<Guid> guidIds = new();
         foreach (var guid in Request.Form["categoriesIds"])
             guidIds.Add(new Guid(guid));
-        await Requests.UpdateRecipe(id, name, ingredientslist, instructionslist, guidIds);
-        Message = $"Update handler fired {id}";
-        Recipes = await Requests.ListRecipes();
-        // Map recipe.CategoriesIds to Names
-        Categories = await Requests.ListCategories();
-        CategoriesNames = GetCategoriesNames(Recipes, Categories);
+        // Validation
+        Models.RecipeValidator validator = new();
+        ValidationResult results = validator.Validate(
+            new Models.Recipe(name, ingredientslist, instructionslist, guidIds)
+        );
+        if (results.IsValid)
+            await Requests.UpdateRecipe(id, name, ingredientslist, instructionslist, guidIds);
+        else
+        {
+            List<string> msgs = new();
+            foreach (var failure in results.Errors)
+                msgs.Add(
+                    $"Property {failure.PropertyName}: {failure.ErrorMessage}"
+                );
+            Messages = msgs;
+        }
+        return RedirectToPage("./Recipes", new { msgs = Messages });
     }
 
-    public async Task OnPostDelete(Guid id)
+    public async Task<IActionResult> OnPostDelete(Guid id)
     {
         await Requests.DeleteRecipe(id);
-        Recipes = await Requests.ListRecipes();
-        // Map recipe.CategoriesIds to Names
-        Categories = await Requests.ListCategories();
-        CategoriesNames = GetCategoriesNames(Recipes, Categories);
-        Message = $"Delete handler fired {id}";
+        return RedirectToPage("./Recipes", new { msgs = Messages });
     }
 
     private List<List<string>> GetCategoriesNames(List<Models.Recipe> Recipes, List<Models.Category> categories)

@@ -4,6 +4,15 @@
     ViewData["Title"] = "Recipes";
 }
 
+@foreach (var msg in Model.Messages)
+{
+    <div class="alert alert-danger shadow p-3 mb-4 bg-body rounded" role="alert">
+        <a class="btn-alert-cls link" data-bs-toggle="modal" data-bs-target="#recipePolcy">
+            @msg
+        </a>
+    </div>
+}
+
 <div class="row">
     <div class="col-sm-8">
         <h2 class="text-start px-4">Recipes</h2>
@@ -75,7 +84,7 @@
                                 <textarea class="form-control h-100" rows="@(recipe.Ingredients.Count)" id="floatingTextarea2" readonly>
                                     @{int j = 0;}
                                     @foreach (var ing in recipe.Ingredients)
-                                        {
+                                    {
                                             if(j==0)
                                             {
                                                 j = 1;
@@ -191,7 +200,7 @@
                                 @foreach (var category in Model.Categories)
                                 {
                                     <div class="form-check form-switch text-start">
-                                        <input class="form-check-input" name="categoriesIds" value="@category.Id" type="checkbox" id="@("flex" + @p)" @if(recipe.CategoriesIds.Contains(category.Id)) {<text>checked</text>}>
+                                        <input class="form-check-input" name="categoriesIds" value="@category.Id" type="checkbox" id="@("flex" + @p)" @if (recipe.CategoriesIds.Contains(category.Id)) {<text> checked</text>}>
                                         <label class="form-check-label" for="@("flex" + @p++)">@category.Name</label>
                                     </div>
                                 }
@@ -247,13 +256,11 @@
                         <label for="floatingInput">Recipe Name</label>
                     </div>
                     <div class="form-floating custom-form-floating">
-                        <textarea class="form-control h-100" name="ingredients" id="floatingTextarea2">
-                    </textarea>
+                        <textarea class="form-control h-100" name="ingredients" id="floatingTextarea2"></textarea>
                         <label for="floatingTextarea2">Ingredients</label>
                     </div>
                     <div class="form-floating custom-form-floating">
-                        <textarea class="form-control h-100" name="instructions" id="floatingTextarea2">
-                    </textarea>
+                        <textarea class="form-control h-100" name="instructions" id="floatingTextarea2"></textarea>
                         <label for="floatingTextarea2">Instructions</label>
                     </div>
                     @{int c = 0;}
@@ -272,6 +279,39 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Policy -->
+<div class="modal fade custom-model" id="recipePolcy" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="recipePolcy" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="categoryPolcy">Recipe Know-How</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating mb-3">
+                    <input type="text" value="Must not be empty." class="form-control" id="floatingInput" readonly>
+                    <label for="floatingInput">Recipe Name</label>
+                </div>
+                <div class="form-floating custom-form-floating">
+                    <textarea class="form-control h-100" rows="2" name="ingredients" id="floatingTextarea2">@("- Must start with '- ', for example: ' - 0.5 kg rice'." + "\n")@("- Can't be empty.")</textarea>
+                    <label for="floatingTextarea2">Ingredients</label>
+                </div>
+                <div class="form-floating custom-form-floating">
+                    <textarea class="form-control h-100" rows="2" name="instructions" id="floatingTextarea2">@("- Must start with '- ', for example: ' - Cook rice for 50 mins'." + "\n")@("- Can't be empty.")</textarea>
+                    <label for="floatingTextarea2">Instructions</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" value="At least one category selected." class="form-control" id="floatingInput" readonly>
+                    <label for="floatingInput">Categories Names</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success fw-bold border-white" data-bs-dismiss="modal">Understood</button>
+            </div>
         </div>
     </div>
 </div>
