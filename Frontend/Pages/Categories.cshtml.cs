@@ -41,7 +41,21 @@ public class CategoriesModel : PageModel
 
     public async Task<IActionResult> OnPostUpdate(string id, string categoryName)
     {
-        _ = await Requests.UpdateCategory(new Guid(id), categoryName);
+        Models.CategoryValidator validator = new();
+        ValidationResult results = validator.Validate(
+            new Models.Category(categoryName)
+        );
+        if (results.IsValid)
+            _ = await Requests.UpdateCategory(new Guid(id), categoryName);
+        else
+        {
+            List<string> msgs = new();
+            foreach (var failure in results.Errors)
+                msgs.Add(
+                    $"Property {failure.PropertyName}: {failure.ErrorMessage}"
+                );
+            Messages = msgs;
+        }
         return RedirectToPage("./Categories", new { msgs = Messages });
     }
 
