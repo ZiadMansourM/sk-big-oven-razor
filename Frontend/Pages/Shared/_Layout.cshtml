@@ -1,40 +1,37 @@
 ﻿<!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is a temp project">
+    <meta name="author" content="Ziad Mansour Mohamed SREboy.com">
+    <title>BigOven - @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Frontend.styles.css" asp-append-version="true" />
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-    </style>
-    <title>BigOven - @ViewData["Title"]</title>
 </head>
-<body class="d-flex h-100 text-center text-white bg-dark">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <header class="mb-auto">
-            <div>
-                <h3 class="float-md-start mb-0" asp-area="" asp-page="/Index">👨‍🍳 BigOven</h3>
-                <nav class="nav nav-masthead justify-content-center float-md-end">
-                    <a class="nav-link @if(@ViewData["Title"]!.ToString() == "Home") {<text>active</text>}" asp-area="" asp-page="/Index">Home</a>
-                    <a class="nav-link @if(@ViewData["Title"]!.ToString() == "Recipes") {<text>active</text>}" asp-area="" asp-page="/Recipes">Recipes</a>
-                    <a class="nav-link @if(@ViewData["Title"]!.ToString() == "Categories") {<text>active</text>}" asp-area="" asp-page="/Categories">Categories</a>
-                </nav>
+<body class="bg-dark text-center text-white">
+    <div class="container d-flex flex-column min-vh-100 p-3">
+        <header class="mb-4">
+            <div class="row">
+                <div class="col text-start">
+                    <h3>👨‍🍳 BigOven</h3>
+                </div>
+                <div class="col">
+                    <nav class="nav nav-masthead justify-content-end">
+                        <a class="nav-link @if(@ViewData["Title"]!.ToString() == "Home") {<text>active</text>}" asp-area="" asp-page="/Index">Home</a>
+                        <a class="nav-link @if(@ViewData["Title"]!.ToString() == "Recipes") {<text>active</text>}" asp-area="" asp-page="/Recipes">Recipes</a>
+                        <a class="nav-link @if(@ViewData["Title"]!.ToString() == "Categories") {<text>active</text>}" asp-area="" asp-page="/Categories">Categories</a>
+                    </nav>
+                </div>
             </div>
         </header>
 
-        <main role="main" class="px-3">
+        <main role="main" class="px-3 my-auto">
             @RenderBody()
         </main>
 
-        <footer class="mt-auto text-white-50">
+        <footer class="text-white-50">
             <p>&copy; 2022 <a href="https://www.SREboy.com/" class="text-white link">SREboy.com</a></p>
         </footer>
 
