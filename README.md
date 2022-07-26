@@ -140,3 +140,37 @@ Third task on my internship at [SilverKey](https://www.silverkeytech.com/).
 - [ ] Add pagination or fix max-height problem.
 
 </details>
+
+
+<details>
+<summary>🚨 Day Five</summary>
+
+# 🦦 Checklist of day five.
+- [x] Try to fix the problem of the main background.
+- [X] Try to add ellipsis in case of long titles.
+```Console
+** photos below for "problem of the main background"
+$ Apparently, it follows a fixed height.
+$ I will try to give it a min-height && somehow expands with data growth.
+```
+
+<img width="1440" alt="Screen Shot 2022-07-25 at 3 53 46 PM" src="https://user-images.githubusercontent.com/64917739/180795776-c3bb6ffe-2da2-47d8-b8e3-0aa6cede879a.png">
+
+## ✅ Results
+<img width="1440" alt="bg" src="https://user-images.githubusercontent.com/64917739/180910748-686b5d3b-6e95-4660-b7cc-385be422a108.png">
+
+```Console
+** photos below for "problem of ellipsis"
+$ The table ignores the main-container width for a certain reason.
+$ Second picture after I gave it "white-space: nowrap", trying to add "text-overflow: ellipsis".
+$ But for some reason no overflow happens in the first place.
+```
+<img width="1440" alt="Screen Shot 2022-07-24 at 8 30 23 PM" src="https://user-images.githubusercontent.com/64917739/180661318-03278e74-cfb7-404c-a76e-41a652d2e3a1.png">
+
+<img width="1440" alt="overflow" src="https://user-images.githubusercontent.com/64917739/180798182-439e0309-2dec-422b-8b4f-446a2154e8c5.png">
+
+## ✅ Results
+
+<img width="1440" alt="ellipsis" src="https://user-images.githubusercontent.com/64917739/180910760-34d3266d-8860-41a4-8619-ddf9307a8501.png">
+
+</details>
