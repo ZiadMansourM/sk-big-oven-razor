@@ -44,16 +44,6 @@ body {
   display: inline-block;
 }
 
-.link-detail {
-    text-decoration: none;
-    display: inline-block;
-    color: rgb(232, 141, 14);
-}
-
-.link-detail:hover {
-    color: rgb(232, 141, 14);
-}
-
 .custom-model .modal-content {
     background-color: #212529;
     border: 3px solid rgb(232, 141, 14);
@@ -106,4 +96,32 @@ body {
     cursor: pointer;
     color: #FFF  !important;
     text-decoration: none;
+}
+
+.table {
+    table-layout: fixed;
+}
+
+th {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+td {
+    width: 80px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: rgb(232, 141, 14);
+}
+
+td a {
+    text-decoration: none;
+    color: rgb(232, 141, 14);
+}
+
+td a:hover {
+    text-decoration: none;
+    color: rgb(232, 141, 14);
 }
