@@ -104,3 +104,39 @@ Third task on my internship at [SilverKey](https://www.silverkeytech.com/).
 
 <img width="1440" alt="seven" src="https://user-images.githubusercontent.com/64917739/180360309-55fd1862-79c9-4a9a-9c75-715c96078838.png">
 </details>
+
+
+
+<details>
+<summary>🚨 Day Four</summary>
+
+# 🦦 Checklist of day four.
+- [X] use FluentValidation.
+```
+- Read docs.
+- Implemented a simple validator for each model.
+```
+- [X] Fixed issue of resubmitting forms after refresh. By using a redirect.
+- [X] Implemented alert messages. To notify users of needed information about inputs.
+
+<img width="1440" alt="Screen Shot 2022-07-24 at 8 30 23 PM" src="https://user-images.githubusercontent.com/64917739/180661318-03278e74-cfb7-404c-a76e-41a652d2e3a1.png">
+
+<img width="1440" alt="Screen Shot 2022-07-24 at 8 31 01 PM" src="https://user-images.githubusercontent.com/64917739/180661312-7d4e76f8-177f-4c8c-8fd5-5897081c6606.png">
+
+- [X] Clicking on error messages opens a model that explains rules to Create or Update.
+
+<img width="1440" alt="Screen Shot 2022-07-24 at 8 53 11 PM" src="https://user-images.githubusercontent.com/64917739/180661813-eb40d6d1-a791-428d-a538-c7d95b43ba6b.png">
+
+<img width="1440" alt="Screen Shot 2022-07-24 at 8 53 36 PM" src="https://user-images.githubusercontent.com/64917739/180661822-51634c30-c0cf-430d-962d-da855f4e6f72.png">
+
+- [X] Read about text-overflow.
+- [ ] Tried to use:
+```Console
+- white-space: nowrap;
+- text-overflow: ellipsis;
+> But for some reason once I do "white-space: nowrap;" the table ignores max-width.
+> of its parent;
+```
+- [ ] Add pagination or fix max-height problem.
+
+</details>
