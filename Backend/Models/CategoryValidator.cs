@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-namespace Frontend.Models;
+namespace Backend.Models;
 
 public class CategoryValidator : AbstractValidator<Category>
 {
