@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
@@ -56,15 +57,39 @@ public static class Recipe
 
     private static IResult CreateRecipe([FromBody] Backend.Models.Recipe recipe)
     {
-        return Results.Json(
-            _service.CreateRecipe(
+        Backend.Models.RecipeValidator validator = new();
+        ValidationResult results = validator.Validate(
+            new Backend.Models.Recipe(
                 recipe.Name,
                 recipe.Ingredients,
                 recipe.Instructions,
                 recipe.CategoriesIds
-            ),
-            statusCode: 200
+            )
         );
+        if (results.IsValid)
+        {
+            return Results.Json(
+                _service.CreateRecipe(
+                    recipe.Name,
+                    recipe.Ingredients,
+                    recipe.Instructions,
+                    recipe.CategoriesIds
+                ),
+                statusCode: 200
+            );
+        }
+        else
+        {
+            List<string> msgs = new();
+            foreach (var failure in results.Errors)
+                msgs.Add(
+                    $"Property {failure.PropertyName}: {failure.ErrorMessage}"
+                );
+            return Results.Json(
+                msgs,
+                statusCode: 400
+            );
+        }
     }
 
     private static IResult GetRecipe(Guid id)
@@ -74,16 +99,40 @@ public static class Recipe
 
     private static IResult UpdateRecipe(Guid id, [FromBody] Backend.Models.Recipe recipe)
     {
-        return Results.Json(
-            _service.UpdateRecipe(
-                id,
+        Backend.Models.RecipeValidator validator = new();
+        ValidationResult results = validator.Validate(
+            new Backend.Models.Recipe(
                 recipe.Name,
                 recipe.Ingredients,
                 recipe.Instructions,
                 recipe.CategoriesIds
-            ),
-            statusCode: 200
+            )
         );
+        if (results.IsValid)
+        {
+            return Results.Json(
+                _service.UpdateRecipe(
+                    id,
+                    recipe.Name,
+                    recipe.Ingredients,
+                    recipe.Instructions,
+                    recipe.CategoriesIds
+                ),
+                statusCode: 200
+            );
+        }
+        else
+        {
+            List<string> msgs = new();
+            foreach (var failure in results.Errors)
+                msgs.Add(
+                    $"Property {failure.PropertyName}: {failure.ErrorMessage}"
+                );
+            return Results.Json(
+                msgs,
+                statusCode: 400
+            );
+        }
     }
 
     private static IResult DeleteRecipe(Guid id)
@@ -116,10 +165,29 @@ public static class Category
 
     private static IResult CreateCategory([FromBody] Backend.Models.Category category)
     {
-        return Results.Json(
-            _service.CreateCategory(category.Name),
-            statusCode: 200
+        Backend.Models.CategoryValidator validator = new();
+        ValidationResult results = validator.Validate(
+            new Backend.Models.Category(category.Name)
         );
+        if (results.IsValid)
+        {
+            return Results.Json(
+                _service.CreateCategory(category.Name),
+                statusCode: 200
+            );
+        }
+        else
+        {
+            List<string> msgs = new();
+            foreach (var failure in results.Errors)
+                msgs.Add(
+                    $"Property {failure.PropertyName}: {failure.ErrorMessage}"
+                );
+            return Results.Json(
+                msgs,
+                statusCode: 400
+            );
+        }
     }
 
     private static IResult GetCategory(Guid id)
@@ -129,14 +197,32 @@ public static class Category
 
     private static IResult UpdateCategory(Guid id, [FromBody] Backend.Models.Category category)
     {
-        Console.WriteLine($"{id}, {category.Id}/{category.Name}");
-        return Results.Json(
-            _service.UpdateCategory(
-                id,
-                category.Name
-            ),
-            statusCode: 200
+        Backend.Models.CategoryValidator validator = new();
+        ValidationResult results = validator.Validate(
+            new Backend.Models.Category(category.Name)
         );
+        if (results.IsValid)
+        {
+            return Results.Json(
+                _service.UpdateCategory(
+                    id,
+                    category.Name
+                ),
+                statusCode: 200
+            );
+        }
+        else
+        {
+            List<string> msgs = new();
+            foreach (var failure in results.Errors)
+                msgs.Add(
+                    $"Property {failure.PropertyName}: {failure.ErrorMessage}"
+                );
+            return Results.Json(
+                msgs,
+                statusCode: 400
+            );
+        }
     }
 
     private static IResult DeleteCategory(Guid id)
