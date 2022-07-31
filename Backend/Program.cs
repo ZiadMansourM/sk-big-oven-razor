@@ -229,7 +229,7 @@ public static class Category
     {
         _service.DeleteCategory(id);
         return Results.Json(
-            new { message = "Deleted Successfully" },
+            new { message = "Deleted Successfully!" },
             statusCode: 200
         );
     }
