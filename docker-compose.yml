@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  frontend:
+    image: ${DOCKER_REGISTRY-}frontend
+    build:
+      context: .
+      dockerfile: Frontend/Dockerfile
+
+  backend:
+    image: ${DOCKER_REGISTRY-}backend
+    build:
+      context: .
+      dockerfile: Backend/Dockerfile
+
