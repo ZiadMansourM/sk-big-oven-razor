@@ -12,7 +12,8 @@ jobs:
     - name: Publish bigoven-frontend to Docker Hub
       uses: docker/build-push-action@v1
       with:
-        context: Frontend
+        context: .
+        dockerfile: Frontend/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ziadmmh/bigoven-frontend
@@ -20,7 +21,8 @@ jobs:
     - name: Publish bigoven-backend to Docker Hub
       uses: docker/build-push-action@v1
       with:
-        context: Backend
+        context: .
+        dockerfile: Backend/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ziadmmh/bigoven-backend
