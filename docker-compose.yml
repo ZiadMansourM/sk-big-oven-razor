@@ -8,8 +8,6 @@ services:
       dockerfile: Frontend/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "80:80"
 
   backend:
     image: ziadmmh/bigoven-backend
@@ -18,5 +16,11 @@ services:
       dockerfile: Backend/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+
+  reverseproxy:
+    image: reverseproxy
+    build:
+      context: .
+      dockerfile: reverseproxy/Dockerfile
     ports:
-      - "3000:80"
+        - 80:80

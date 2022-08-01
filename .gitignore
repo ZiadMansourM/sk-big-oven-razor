@@ -1,3 +1,6 @@
+# custom
+local.yml
+
 # globs
 Makefile.in
 *.userprefs
