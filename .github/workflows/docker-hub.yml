@@ -27,3 +27,12 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ziadmmh/bigoven-backend
         tags: latest, ${{ github.run_number }}
+    - name: Publish reverseproxy to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        context: .
+        dockerfile: reverseproxy/Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: ziadmmh/bigoven-reverseproxy
+        tags: latest, ${{ github.run_number }}
