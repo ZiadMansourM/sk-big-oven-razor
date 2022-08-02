@@ -27,7 +27,7 @@ app.UseSwagger(
                 {
                     // You can set the Url from the default http request data or by hard coding it
                     // Url = $"{httpReq.Scheme}://{httpReq.Host.Value}",
-                    Url = $"{httpReq.Scheme}://{httpReq.Host.Value}/api",
+                    Url = "https://skbigoven.azurewebsites.net/api",
                     Description = "v1"
                 }
             };
@@ -55,7 +55,7 @@ public partial class Program
 public static class Main
 {
     private static IResult Index() => Results.Json(new { message = "Home Page..." });
-    private static IResult About() => Results.Json(new { message = "About page!" });
+    private static IResult About() => Results.Json(new { message = "About page ^^" });
 
     public static void Router(IEndpointRouteBuilder router)
     {
