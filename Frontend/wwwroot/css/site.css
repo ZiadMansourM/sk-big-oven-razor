@@ -102,7 +102,7 @@ body {
     table-layout: fixed;
 }
 
-th {
+th.ellipses {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
