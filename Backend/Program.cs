@@ -2,10 +2,20 @@
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
+// ConfigureServices
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AnyOrigin", builder =>
+    {
+        builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod();
+    });
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
-
+app.UseCors("AnyOrigin");
 app.UseSwagger(
     options =>
     {
@@ -43,7 +53,7 @@ public partial class Program
 
 public static class Main
 {
-    private static IResult Index() => Results.Json(new { message = "Home Page" });
+    private static IResult Index() => Results.Json(new { message = "Home Page ^^" });
     private static IResult About() => Results.Json(new { message = "About page!" });
 
     public static void Router(IEndpointRouteBuilder router)
