@@ -110,10 +110,13 @@ th {
 
 td {
     width: 80px;
+    color: rgb(232, 141, 14);
+}
+
+td.ellipses {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    color: rgb(232, 141, 14);
 }
 
 td a {

@@ -14,10 +14,10 @@
 }
 
 <div class="row">
-    <div class="col-sm-8">
+    <div class="col">
         <h2 class="text-start ps-4">Categories</h2>
     </div>
-    <div class="col-sm-4">
+    <div class="col text-end">
         <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#createCategory">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -29,148 +29,150 @@
 </div>
 <hr />
 <br />
-<table class="table table-dark">
-    <thead>
-        <tr class="d-flex">
-            <th class="col-1" scope="col">#</th>
-            <th class="col-8" scope="col">Name</th>
-            <th class="col-3" scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{int i = 1;}
-        @foreach (var category in Model.Categories)
-        {
+<div class="table-responsive">
+    <table class="table table-dark">
+        <thead>
             <tr class="d-flex">
-                <th class="col-1" scope="row">@(i++)</th>
-                <td class="col-8"><a href="#" data-bs-toggle="modal" data-bs-target="#@("iddetail" + category.Id)">@category.Name</a></td>
-                <td class="col-3">
-                    <button class="btn btn-link link" data-bs-toggle="modal" data-bs-target="#@("id" + category.Id)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-pencil" viewBox="0 0 16 16">
-                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                        </svg>
-                    </button>
-                    <button class="btn btn-link link" data-bs-toggle="modal" data-bs-target="#@("iddelete" + category.Id)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-trash3" viewBox="0 0 16 16">
-                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                        </svg>
-                    </button>
-                </td>
+                <th class="col-1" scope="col">#</th>
+                <th class="col-7 col-md-8 col-lg-8" scope="col">Name</th>
+                <th class="col-4 col-md-3 col-lg-3" scope="col">Actions</th>
             </tr>
-            <!-- Detail Modal -->
-            <div class="modal fade custom-model" id="@("iddetail" + category.Id)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="@("iddetail" + category.Id)" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="@("iddetail" + category.Id)">Category Details</h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" value="@category.Id" readonly>
-                                <label for="floatingInput">Category Guid</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" value="@category.Name" readonly>
-                                <label for="floatingInput">Category Name</label>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary fw-bold border-white bg-white" data-bs-dismiss="modal">Great</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Edit Modal -->
-            <div class="modal fade custom-model" id="@("id" + category.Id)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="@("id" + category.Id)" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <form asp-page-handler="update" method="post">
+        </thead>
+        <tbody>
+            @{int i = 1;}
+            @foreach (var category in Model.Categories)
+            {
+                <tr class="d-flex">
+                    <th class="col-1" scope="row">@(i++)</th>
+                    <td class="col-7 col-md-8 col-lg-8 ellipses"><a href="#" data-bs-toggle="modal" data-bs-target="#@("iddetail" + category.Id)">@category.Name</a></td>
+                    <td class="col-4 col-md-3 col-lg-3">
+                        <button class="btn btn-link link" data-bs-toggle="modal" data-bs-target="#@("id" + category.Id)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                            </svg>
+                        </button>
+                        <button class="btn btn-link link" data-bs-toggle="modal" data-bs-target="#@("iddelete" + category.Id)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-trash3" viewBox="0 0 16 16">
+                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+                <!-- Detail Modal -->
+                <div class="modal fade custom-model" id="@("iddetail" + category.Id)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="@("iddetail" + category.Id)" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="@("id" + category.Id)">Update Category</h5>
+                                <h5 class="modal-title" id="@("iddetail" + category.Id)">Category Details</h5>
                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <input type="hidden" name="id" value="@category.Id" />
                                 <div class="form-floating mb-3">
-                                    <input type="text" name="categoryName" class="form-control" id="floatingInput" placeholder="Egyptian Food">
-                                    <label for="floatingInput">New Category Name</label>
+                                    <input type="text" class="form-control" id="floatingInput" value="@category.Id" readonly>
+                                    <label for="floatingInput">Category Guid</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingInput" value="@category.Name" readonly>
+                                    <label for="floatingInput">Category Name</label>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary fw-bold border-white bg-white" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-success fw-bold border-white">Update</button>
+                                <button type="button" class="btn btn-secondary fw-bold border-white bg-white" data-bs-dismiss="modal">Great</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Delete Modal -->
-            <div class="modal fade custom-model" id="@("iddelete" + category.Id)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="@("iddelete" + category.Id)" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <form asp-page-handler="delete" method="post">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="@("iddelete" + category.Id)">Delete Category</h5>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <h3>Confirm deleteing "@category.Name" 👀?</h3>
-                                <p class="text-danger">This can't be undone!</p>
-                                <input type="hidden" name="id" value="@category.Id" />
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary fw-bold border-white bg-white" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-danger fw-bold border-white">Delete</button>
-                            </div>
-                        </form>
+                <!-- Edit Modal -->
+                <div class="modal fade custom-model" id="@("id" + category.Id)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="@("id" + category.Id)" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <form asp-page-handler="update" method="post">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="@("id" + category.Id)">Update Category</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="hidden" name="id" value="@category.Id" />
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="categoryName" class="form-control" id="floatingInput" placeholder="Egyptian Food">
+                                        <label for="floatingInput">New Category Name</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary fw-bold border-white bg-white" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success fw-bold border-white">Update</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
-    </tbody>
-</table>
+                <!-- Delete Modal -->
+                <div class="modal fade custom-model" id="@("iddelete" + category.Id)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="@("iddelete" + category.Id)" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <form asp-page-handler="delete" method="post">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="@("iddelete" + category.Id)">Delete Category</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h3>Confirm deleteing "@category.Name" 👀?</h3>
+                                    <p class="text-danger">This can't be undone!</p>
+                                    <input type="hidden" name="id" value="@category.Id" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary fw-bold border-white bg-white" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger fw-bold border-white">Delete</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </tbody>
+    </table>
 
-<!-- Create Modal -->
-<div class="modal fade custom-model" id="createCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createCategoryLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <form asp-page-handler="create" method="post">
+    <!-- Create Modal -->
+    <div class="modal fade custom-model" id="createCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createCategoryLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form asp-page-handler="create" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createCategoryLabel">Create Category</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="categoryName" class="form-control" id="floatingInput" placeholder="Egyptian Food">
+                            <label for="floatingInput">Category Name</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary fw-bold border-white bg-white" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success fw-bold border-white">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Policy -->
+    <div class="modal fade custom-model" id="categoryPolcy" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="categoryPolcy" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createCategoryLabel">Create Category</h5>
+                    <h5 class="modal-title" id="categoryPolcy">Category Know-How</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input type="text" name="categoryName" class="form-control" id="floatingInput" placeholder="Egyptian Food">
+                        <input type="text" value="Must not be empty." class="form-control" id="floatingInput" placeholder="Egyptian Food" readonly>
                         <label for="floatingInput">Category Name</label>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary fw-bold border-white bg-white" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success fw-bold border-white">Create</button>
+                    <button type="button" class="btn btn-success fw-bold border-white" data-bs-dismiss="modal">Understood</button>
                 </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Policy -->
-<div class="modal fade custom-model" id="categoryPolcy" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="categoryPolcy" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="categoryPolcy">Category Know-How</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="form-floating mb-3">
-                    <input type="text" value="Must not be empty." class="form-control" id="floatingInput" placeholder="Egyptian Food" readonly>
-                    <label for="floatingInput">Category Name</label>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success fw-bold border-white" data-bs-dismiss="modal">Understood</button>
             </div>
         </div>
     </div>
