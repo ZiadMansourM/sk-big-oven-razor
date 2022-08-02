@@ -15,8 +15,6 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
-app.UseHttpsRedirection();
-app.UseCors("AnyOrigin");
 app.UseSwagger(
     options =>
     {
@@ -38,6 +36,8 @@ app.UseSwagger(
 );
 
 app.UseSwaggerUI();
+app.UseHttpsRedirection();
+app.UseCors("AnyOrigin");
 
 Main.Router(app);
 Recipe.Router(app);
@@ -54,7 +54,7 @@ public partial class Program
 
 public static class Main
 {
-    private static IResult Index() => Results.Json(new { message = "Home Page ^^" });
+    private static IResult Index() => Results.Json(new { message = "Home Page!" });
     private static IResult About() => Results.Json(new { message = "About page!" });
 
     public static void Router(IEndpointRouteBuilder router)
