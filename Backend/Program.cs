@@ -6,13 +6,27 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI(
-    options => {
-        options.SwaggerEndpoint("./swagger/v1/swagger.json", "v1");
-        options.RoutePrefix = string.Empty;
+app.UseSwagger(
+    options =>
+    {
+        options.PreSerializeFilters.Add((swagger, httpReq) =>
+        {
+            swagger.Servers = new List<Microsoft.OpenApi.Models.OpenApiServer>
+            {
+                // You can add as many OpenApiServer instances as you want by creating them like below
+                new Microsoft.OpenApi.Models.OpenApiServer
+                {
+                    // You can set the Url from the default http request data or by hard coding it
+                    // Url = $"{httpReq.Scheme}://{httpReq.Host.Value}",
+                    Url = "http://localhost/api",
+                    Description = "Backend server"
+                }
+            };
+        }); 
     }
 );
+
+app.UseSwaggerUI();
 
 Main.Router(app);
 Recipe.Router(app);
