@@ -15,6 +15,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
+app.UseHttpsRedirection();
 app.UseCors("AnyOrigin");
 app.UseSwagger(
     options =>
