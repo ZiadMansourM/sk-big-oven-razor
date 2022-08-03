@@ -3,36 +3,26 @@ name: Docker Images Build & Push to DockerHub
 on: push
 
 jobs:
-  publish-container:
-    name: Publish Docker Container
+  publish-image:
+    name: Publish Docker image
     runs-on: ubuntu-latest
+    matrix:
+       include:
+         - dockerfile: Frontend/Dockerfile
+           repository: ziadmmh/bigoven-frontend
+         - dockerfile: Backend/Dockerfile
+           repository: ziadmmh/bigoven-backend
+         - dockerfile: reverseproxy/Dockerfile
+           repository: ziadmmh/bigoven-reverseproxy
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
-    - name: Publish bigoven-frontend to Docker Hub
+    - name: Publish image to Docker Hub
       uses: docker/build-push-action@v1
       with:
         context: .
-        dockerfile: Frontend/Dockerfile
+        dockerfile: ${{ matrix.dockerfile }}
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: ziadmmh/bigoven-frontend
-        tags: latest, ${{ github.run_number }}
-    - name: Publish bigoven-backend to Docker Hub
-      uses: docker/build-push-action@v1
-      with:
-        context: .
-        dockerfile: Backend/Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: ziadmmh/bigoven-backend
-        tags: latest, ${{ github.run_number }}
-    - name: Publish reverseproxy to Docker Hub
-      uses: docker/build-push-action@v1
-      with:
-        context: .
-        dockerfile: reverseproxy/Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: ziadmmh/bigoven-reverseproxy
+        repository: ${{ matrix.repository }}
         tags: latest, ${{ github.run_number }}

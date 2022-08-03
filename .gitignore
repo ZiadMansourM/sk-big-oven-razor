@@ -1,6 +1,6 @@
 # project-level
 local.yml
-
+**/.vscode
 # globs
 Makefile.in
 *.userprefs
